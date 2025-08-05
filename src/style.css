@@ -1,0 +1,340 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #f7df1eeaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+canvas {
+  border: 4px solid #00fff7;
+  box-shadow: 0 0 40px #00fff7, 0 0 80px #1a2980;
+  margin: 30px auto;
+  display: block;
+  border-radius: 18px;
+  background: rgba(20, 20, 40, 0.7);
+}
+.phaser-text {
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #1a2980;
+}
+
+/* Super good neon city night theme background */
+.app-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 40%, #1a2980 100%), url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+.custom-icon {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffe600;
+  text-shadow: 0 0 10px #fff700, 0 0 30px #ffe600;
+  z-index: 2;
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+/* Main layout: quiz left, options right */
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  min-width: 700px;
+  flex-wrap: wrap;
+}
+.quiz-section {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 340px;
+  margin-left: 40px;
+  margin-top: 40px;
+  box-sizing: border-box;
+}
+.side-section {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 340px;
+  height: 100vh;
+  background: #181818cc;
+  box-shadow: -2px 0 18px #00fff7, -2px 0 32px #ff00cc;
+  border-left: 2.5px solid #00fff7;
+  padding-top: 60px;
+  box-sizing: border-box;
+}
+.side-btn {
+  font-size: 1.3rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 32px;
+  box-shadow: 0 0 12px #00fff7, 0 0 18px #ff00cc;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 1.2em;
+  width: 220px;
+}
+.side-btn:active {
+  transform: scale(0.96);
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+}
+#side-window {
+  width: 100%;
+  margin-top: 0;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#side-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+}
+.side-home-btn {
+  font-size: 0.95rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #ffe600 0%, #ff00cc 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 16px;
+  box-shadow: 0 0 8px #ffe600, 0 0 14px #ff00cc;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 110px;
+  z-index: 20;
+}
+.truth-dare-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 180px;
+}
+.truth-btn, .dare-btn {
+  font-size: 1.1rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 8px 22px;
+  box-shadow: 0 0 12px #00fff7, 0 0 18px #ff00cc;
+  cursor: pointer;
+  margin: 0.5em 0.5em 1.2em 0.5em;
+  width: 140px;
+}
+.truth-btn.active, .dare-btn.active {
+  background: linear-gradient(90deg, #ffe600 0%, #ff00cc 100%);
+  color: #222;
+  box-shadow: 0 0 18px #ff00cc, 0 0 32px #ffe600;
+}
+.td-question {
+  font-size: 1.2rem;
+  color: #ffe600;
+  margin-top: 1.2em;
+  text-align: center;
+  min-height: 40px;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+}
+
+/* SPIN bar reduced by 30% */
+.spin-bar {
+  background: #181818cc;
+  border-radius: 24px;
+  box-shadow: 0 0 32px #00fff7, 0 0 60px #ff00cc;
+  padding: 22px 12px 22px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 4px solid #00fff7;
+  margin-bottom: 18px;
+  position: relative;
+  width: 98px;
+}
+.spin-point {
+  font-size: 1.2rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #ffe600;
+  text-shadow: 0 0 12px #ffe600, 0 0 32px #ff00cc;
+  padding: 7px 0;
+  width: 70px;
+  text-align: center;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #222 60%, #ffe60022 100%);
+  margin: 0 auto;
+}
+.spin-bar-arrow {
+  position: absolute;
+  right: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.9rem;
+  color: #00fff7;
+  text-shadow: 0 0 12px #00fff7, 0 0 32px #ff00cc;
+  pointer-events: none;
+}
+/* Truth or Dare Back & Next buttons right side, below window */
+.td-nav {
+  margin-top: 2.2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  gap: 32px;
+}
+.td-nav-center {
+  justify-content: center !important;
+}
+.td-nav-btn {
+  font-size: 1.05rem;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 18px;
+  box-shadow: 0 0 8px #00fff7, 0 0 14px #ff00cc;
+  cursor: pointer;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+  width: 100px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+    min-width: 340px;
+    height: auto;
+  }
+  .quiz-section {
+    min-width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .side-section {
+    min-width: 100%;
+    height: auto;
+    border-left: none;
+    border-top: 2.5px solid #00fff7;
+    box-shadow: none;
+    padding-top: 20px;
+  }
+}

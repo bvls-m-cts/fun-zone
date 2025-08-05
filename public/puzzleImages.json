@@ -1,0 +1,20 @@
+{
+  "images": [
+    {
+      "src": "eiffel1.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg"
+    },
+    {
+      "src": "eiffel2.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Eiffel_Tower_at_night_%28cropped%29.jpg"
+    },
+    {
+      "src": "eiffel3.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Eiffel_Tower_from_the_Trocadero%2C_Paris_5_April_2019.jpg"
+    },
+    {
+      "src": "eiffel4.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Eiffel_Tower_%28cropped%29.jpg"
+    }
+  ]
+}
