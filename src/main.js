@@ -11,6 +11,7 @@ document.querySelector('#app').innerHTML = `
       <div class="side-section">
         <button class="side-btn" id="spin-mode-btn">SPIN</button>
         <button class="side-btn" id="truth-mode-btn">Truth or Dare</button>
+        <img id="side-image" class="side-image" src="https://tse3.mm.bing.net/th/id/OIP.BTguMi1K03ueP-zrJjNNcwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="side image">
         <div id="side-window"></div>
       </div>
     </div>
@@ -21,16 +22,19 @@ document.querySelector('#app').innerHTML = `
 const sideWindow = document.getElementById('side-window');
 const spinModeBtn = document.getElementById('spin-mode-btn');
 const truthModeBtn = document.getElementById('truth-mode-btn');
+const sideImage = document.getElementById('side-image');
 const sideSection = document.querySelector('.side-section');
 
 function showHomeBtns() {
   spinModeBtn.style.display = 'block';
   truthModeBtn.style.display = 'block';
+  sideImage.style.display = 'block';
   sideWindow.innerHTML = '';
 }
 function hideHomeBtns() {
   spinModeBtn.style.display = 'none';
   truthModeBtn.style.display = 'none';
+  sideImage.style.display = 'none';
 }
 function showHomeBtn(callback) {
   sideWindow.innerHTML += `<button class="side-home-btn" id="side-home-btn">Home</button>`;
