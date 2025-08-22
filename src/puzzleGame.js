@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { puzzles } from './puzzles';
+import { puzzles } from './questions';
 
 class StartScene extends Phaser.Scene {
   constructor() {
@@ -11,8 +11,8 @@ class StartScene extends Phaser.Scene {
     // Centered Start button only
     const startBtn = this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'Start', {
       fontSize: '36px',
-      color: '#fff',
-      backgroundColor: '#ff00cc',
+      color: '#000000',
+      backgroundColor: '#FFD700',
       padding: { x: 30, y: 15 }
     })
       .setOrigin(0.5, 0.5)
@@ -59,7 +59,7 @@ class PuzzleScene extends Phaser.Scene {
     this.children.removeAll();
     const puzzle = this.puzzleList[this.currentPuzzle];
     if (!puzzle) {
-      this.add.text(200, 200, 'No more puzzles! Congrats!', { fontSize: '32px', color: '#fff' });
+      this.add.text(200, 200, 'Congratulations to the Winners!', { fontSize: '32px', color: '#fff' });
       // Home button at top right
       const homeBtn = this.add.text(this.sys.game.config.width - 120, 30, '🏠 Home', { fontSize: '22px', color: '#fff', backgroundColor: '#222', padding: { x: 10, y: 5 } })
         .setInteractive()
@@ -69,7 +69,7 @@ class PuzzleScene extends Phaser.Scene {
       homeBtn.on('pointerout', () => homeBtn.setAlpha(0.85));
       return;
     }
-    const questionText = this.add.text(100, 100, puzzle.question, { fontSize: '22px', color: '#fff', wordWrap: { width: 600 } });
+    const questionText = this.add.text(100, 100, puzzle.question, { fontSize: '22px', color: '#fff', wordWrap: { width: 600 }, fontFamily: '"Times New Roman", Times, serif' });
     questionText.setAlpha(0);
     this.tweens.add({ targets: questionText, alpha: 1, duration: 600, delay: 200 });
     let lastY = 180;
@@ -77,9 +77,9 @@ class PuzzleScene extends Phaser.Scene {
     let inputBox;
     let revealed = false;
     if (puzzle.type === 'multiple-choice') {
-      answerText = this.add.text(400, 420, '', { fontSize: '20px', color: '#00fff7' });
+      answerText = this.add.text(400, 420, '', { fontSize: '24px', color: '#00fff7', fontFamily: '"Times New Roman", Times, serif' });
       puzzle.options.forEach((opt, i) => {
-        const optText = this.add.text(120, lastY + i * 40, opt, { fontSize: '20px', color: '#fff', backgroundColor: '#333' })
+        const optText = this.add.text(120, lastY + i * 40, opt, { fontSize: '24px', color: '#fff', backgroundColor: '#333' })
           .setInteractive()
           .on('pointerdown', () => {
             if (!revealed) answerText.setText('');
@@ -95,7 +95,7 @@ class PuzzleScene extends Phaser.Scene {
       puzzle.type === 'word-image'
     ) {
       inputBox = this.add.dom(400, lastY + 30).createFromHTML('<input type="text" id="answerInput" style="font-size:20px;padding:5px;width:220px;">');
-      answerText = this.add.text(400, 420, '', { fontSize: '20px', color: '#00fff7' });
+      answerText = this.add.text(400, 420, '', { fontSize: '24px', color: '#00fff7', fontFamily: '"Times New Roman", Times, serif' });
       // Check Answer button
       const checkBtn = this.add.text(650, lastY + 20, 'Check', { fontSize: '20px', color: '#fff', backgroundColor: '#27ae60', padding: { x: 10, y: 5 } })
         .setInteractive()
@@ -108,7 +108,7 @@ class PuzzleScene extends Phaser.Scene {
       checkBtn.on('pointerout', () => checkBtn.setAlpha(0.9));
       lastY += 120;
     } else if (puzzle.type === 'image-choice') {
-      answerText = this.add.text(this.sys.game.config.width / 2, 420, '', { fontSize: '20px', color: '#f39c12' }).setOrigin(0.5, 0.5);
+      answerText = this.add.text(this.sys.game.config.width / 2, 420, '', { fontSize: '24px', color: '#f39c12', fontFamily: '"Times New Roman", Times, serif' }).setOrigin(0.5, 0.5);
       // Center images horizontally and auto-fit size (maximize size)
       const imgCount = puzzle.images.length;
       const maxTotalWidth = this.sys.game.config.width - 40; // 20px margin on each side
@@ -153,6 +153,26 @@ class PuzzleScene extends Phaser.Scene {
     revealBtn.setAlpha(0.9);
     revealBtn.on('pointerover', () => revealBtn.setAlpha(1));
     revealBtn.on('pointerout', () => revealBtn.setAlpha(0.9));
+
+    // Hint button
+    const hintBtnX = revealBtnX + revealBtn.width + 20;
+    const hintBtn = this.add.text(hintBtnX, revealBtnY, 'Hint', { fontSize: '20px', color: '#fff', backgroundColor: '#27ae60', padding: { x: 16, y: 8 } })
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (puzzle.hint) {
+          answerText.setText(`Hint: ${puzzle.hint}`);
+          answerText.setColor('#27ae60');
+        }
+      });
+
+    if (puzzle.hint) {
+      hintBtn.setAlpha(0.9);
+      hintBtn.on('pointerover', () => hintBtn.setAlpha(1));
+      hintBtn.on('pointerout', () => hintBtn.setAlpha(0.9));
+    } else {
+      hintBtn.setAlpha(0.3);
+      hintBtn.disableInteractive();
+    }
     // Navigation buttons (bottom left and right)
     const navBtnY = this.sys.game.config.height - 60;
     // Back button (bottom left)
@@ -168,7 +188,7 @@ class PuzzleScene extends Phaser.Scene {
     navBackBtn.on('pointerover', () => navBackBtn.setAlpha(1));
     navBackBtn.on('pointerout', () => navBackBtn.setAlpha(0.9));
     // Next button (bottom right)
-    const navNextBtnX = this.sys.game.config.width - 170;
+    const navNextBtnX = this.sys.game.config.width - 130;
     const navNextBtn = this.add.text(navNextBtnX, navBtnY, 'Next ▶', { fontSize: '20px', color: '#00fff7', backgroundColor: '#222', padding: { x: 16, y: 8 } })
       .setInteractive()
       .on('pointerdown', () => {
@@ -185,7 +205,7 @@ class PuzzleScene extends Phaser.Scene {
     navNextBtn.on('pointerout', () => navNextBtn.setAlpha(0.9));
     this.tweens.add({ targets: navNextBtn, alpha: 1, duration: 400, delay: 1000 });
     // Home button always present
-    const homeBtn = this.add.text(this.sys.game.config.width - 120, 30, '🏠 Home', { fontSize: '22px', color: '#fff', backgroundColor: '#222', padding: { x: 10, y: 5 } })
+    const homeBtn = this.add.text(this.sys.game.config.width - 130, 30, '🏠 Home', { fontSize: '22px', color: '#fff', backgroundColor: '#222', padding: { x: 10, y: 5 } })
       .setInteractive()
       .on('pointerdown', () => this.scene.start('Start'));
     homeBtn.setAlpha(0.85);
@@ -193,10 +213,15 @@ class PuzzleScene extends Phaser.Scene {
     homeBtn.on('pointerout', () => homeBtn.setAlpha(0.85));
     // Position answer text below navigation buttons for all puzzle types
     if (answerText) {
-      const answerY = this.sys.game.config.height - 20; // 20px from bottom
+      let answerY;
+      if (puzzle.type === 'image-choice') {
+        answerY = lastY;
+      } else {
+        answerY = navBtnY - answerText.height - 20;
+      }
       answerText.setX(this.sys.game.config.width / 2);
       answerText.setY(answerY);
-      answerText.setOrigin(0.5, 1);
+      answerText.setOrigin(0.5, 0.5);
       answerText.setColor('#f39c12');
       answerText.setDepth(10);
     }
@@ -225,7 +250,7 @@ const config = {
   type: Phaser.AUTO,
   width: 900,
   height: 500,
-  backgroundColor: '#111',
+  backgroundColor: 'transparent',
   parent: 'game-root',
   scene: [StartScene, PuzzleScene],
 };
