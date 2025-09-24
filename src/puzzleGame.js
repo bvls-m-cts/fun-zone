@@ -377,6 +377,13 @@ class EndScene extends Phaser.Scene {
     create() {
         const endImage = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'the-end');
         endImage.setScale(Math.min(this.sys.game.config.width / endImage.width, this.sys.game.config.height / endImage.height));
+        endImage.setAlpha(0); // Start invisible
+        this.tweens.add({
+            targets: endImage,
+            alpha: 1,
+            duration: 1200,
+            ease: 'Power2'
+        });
 
         const homeBtn = this.add.text(this.sys.game.config.width - 120, 30, '🏠 Home', { fontSize: '22px', color: '#fff', backgroundColor: '#222', padding: { x: 10, y: 5 } })
             .setInteractive()
