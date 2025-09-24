@@ -5,6 +5,7 @@ import { showTruthOrDare } from './truthOrDare.js';
 
 document.querySelector('#app').innerHTML = `
   <div class="app-bg">
+    <div class="credits-icon" id="credits-icon" title="Credits">&#9432;</div>
     <div class="main-layout">
       <div class="quiz-section">
         <div id="car"></div>
@@ -26,6 +27,10 @@ document.querySelector('#app').innerHTML = `
 
 const spinModeBtn = document.getElementById('spin-mode-btn');
 const truthModeBtn = document.getElementById('truth-mode-btn');
+const creditsIcon = document.getElementById('credits-icon');
 
 spinModeBtn.onclick = showSpinWheel;
 truthModeBtn.onclick = showTruthOrDare;
+creditsIcon.onclick = () => {
+  import('./ui.js').then(mod => mod.showCreditsPopup());
+};
