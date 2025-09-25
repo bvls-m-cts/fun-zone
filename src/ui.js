@@ -73,12 +73,13 @@ export function showCreditsPopup() {
         <div class="credits-person">Bhargava Mandalaneni</div>
       </div>
       <div class="credits-section">
-        <h3>Quiz Contributors</h3>
+        <h3>Quiz Contributor</h3>
         <div class="credits-person">Sangeetha Seshadri</div>
         <div class="credits-person">Usha Nandhini</div>
+        <div class="credits-person">Bhargava Mandalaneni</div>
       </div>
       <div class="credits-section">
-        <h3>Reviewers</h3>
+        <h3>Advisor</h3>
         <div class="credits-person">Karthick Ramamurthy</div>
         <div class="credits-person">Sivasankar Natarajan</div>
       </div>
