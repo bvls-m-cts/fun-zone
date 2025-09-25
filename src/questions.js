@@ -2,8 +2,8 @@ export const puzzles = {
   all: [
     {
       type: 'multiple-choice',
-      question: "I’m there when your tire goes flat, Or when your engine says, “That’s that!”\nI’m not a mechanic, but I send one fast.\nWho am I, making breakdowns a thing of the past?",
-      options: ['a. Car Dealership', 'b. Car Dealership', 'c. Vehicle Warranty', 'd. AA Roadside Assistance'],
+      question: "I’m there when your tire goes flat, Or when your engine says, “That’s that!.”\nI’m not a mechanic, but I send one fast.\nWho am I, making breakdowns a thing of the past?",
+      options: ['a. Car Dealership', 'b. GPS Navigation', 'c. Vehicle Warranty', 'd. AA Roadside Assistance'],
       hint: '', 
       answer: 'd. AA Roadside Assistance',
       explanation: ''
