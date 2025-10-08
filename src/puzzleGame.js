@@ -299,30 +299,55 @@ class PuzzleScene extends Phaser.Scene {
     // });
   }
   showExplanation(explanation) {
-    const explanationBg = this.add.graphics({ fillStyle: { color: 0x000000, alpha: 0.7 } });
+    // Dimmed background, closes popup on click
+    const explanationBg = this.add.graphics();
+    explanationBg.fillStyle(0x000000, 0.7);
     explanationBg.fillRect(0, 0, this.sys.game.config.width, this.sys.game.config.height);
+    explanationBg.setDepth(10);
     explanationBg.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sys.game.config.width, this.sys.game.config.height), Phaser.Geom.Rectangle.Contains);
 
+    // Popup box
+    const boxWidth = this.sys.game.config.width * 0.7;
+    const boxHeight = this.sys.game.config.height * 0.35;
+    const boxX = (this.sys.game.config.width - boxWidth) / 2;
+    const boxY = (this.sys.game.config.height - boxHeight) / 2;
+    const popupBox = this.add.graphics();
+    popupBox.fillStyle(0xffffff, 1);
+    popupBox.lineStyle(3, 0x27ae60, 1);
+    popupBox.fillRoundedRect(boxX, boxY, boxWidth, boxHeight, 24);
+    popupBox.strokeRoundedRect(boxX, boxY, boxWidth, boxHeight, 24);
+    popupBox.setDepth(11);
+
+    // Explanation text
     const explanationText = this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, explanation, {
-        fontSize: '20px',
-        color: '#000',
-        backgroundColor: '#fff',
-        wordWrap: { width: this.sys.game.config.width * 0.8 },
-        padding: { x: 20, y: 20 }
+      fontFamily: 'Segoe UI, Arial, sans-serif',
+      fontSize: '22px',
+      color: '#222',
+      wordWrap: { width: boxWidth - 40 },
+      align: 'center',
+      padding: { x: 20, y: 20 }
     }).setOrigin(0.5);
+    explanationText.setDepth(12);
 
-    const closeBtn = this.add.text(explanationText.x + explanationText.width / 2 - 20, explanationText.y - explanationText.height / 2 + 20, 'X', {
-        fontSize: '24px',
-        color: '#fff',
-        backgroundColor: '#ff0000',
-        padding: { x: 5, y: 2 }
+    // Close button (top right of popup)
+    const closeBtn = this.add.text(boxX + boxWidth - 24, boxY + 24, '✖', {
+      fontSize: '28px',
+      fontFamily: 'Segoe UI, Arial, sans-serif',
+      color: '#fff',
+      backgroundColor: '#e74c3c',
+      padding: { x: 8, y: 2 }
     }).setOrigin(0.5).setInteractive();
+    closeBtn.setDepth(13);
 
-    closeBtn.on('pointerdown', () => {
-        explanationBg.destroy();
-        explanationText.destroy();
-        closeBtn.destroy();
-    });
+    // Close on background click or button click
+    const destroyPopup = () => {
+      explanationBg.destroy();
+      popupBox.destroy();
+      explanationText.destroy();
+      closeBtn.destroy();
+    };
+    explanationBg.on('pointerdown', destroyPopup);
+    closeBtn.on('pointerdown', destroyPopup);
   }
 
   showImageModal(imageKey) {
