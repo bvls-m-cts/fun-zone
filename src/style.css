@@ -63,7 +63,7 @@ h1 {
   color: #888;
 }
 
-button {
+button, .aa-button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -73,9 +73,17 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: 0 4px 0 #888, 0 2px 8px rgba(0,0,0,0.15);
 }
-button:hover {
+button:hover, .aa-button:hover {
   border-color: #646cff;
+  box-shadow: 0 2px 0 #666, 0 4px 16px rgba(0,0,0,0.18);
+  transform: translateY(-2px);
+}
+button:active, .aa-button:active {
+  transform: scale(0.96);
+  background: #f2f2f2;
+  box-shadow: 0 1px 0 #444, 0 2px 4px rgba(0,0,0,0.12);
 }
 button:focus,
 button:focus-visible {
@@ -151,6 +159,7 @@ canvas {
   min-width: 400px;
   height: 100vh;
   background: #020202;
+  /* background: #100e03d5; */
   padding-top: 50px;
   box-sizing: border-box;
   border: 5px solid transparent;
@@ -606,4 +615,69 @@ img[src="/AA_logo.jpg"] {
 }
 #close-credits-btn:hover {
   background: #41F09A;
+}
+
+/* Golden gradients, shadows, and animated transitions for hint/explanation modal and buttons */
+.hint-explanation-popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.hint-explanation-popup.show {
+  opacity: 1;
+}
+.hint-explanation-content {
+  background: linear-gradient(135deg, #FFD700 0%, #FFFACD 100%);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.18), 0 2px 8px rgba(0,0,0,0.12);
+  border-radius: 18px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 340px;
+  max-width: 90vw;
+  animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  position: relative;
+}
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.close-hint-explanation {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(255,215,0,0.2);
+  cursor: pointer;
+  transition: background 0.4s, transform 0.2s;
+}
+.close-hint-explanation:hover {
+  background: linear-gradient(90deg, #FFA500 0%, #FFD700 100%);
+  transform: scale(1.1);
+}
+.hint-text, .explanation-text {
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
+  color: #222;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s;
+}
+.hint-text {
+  border-left: 5px solid #FFD700;
+}
+.explanation-text {
+  border-left: 5px solid #FFA500;
 }
