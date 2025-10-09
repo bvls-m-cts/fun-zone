@@ -116,7 +116,7 @@ export const puzzles = {
     },
     {
       type: 'image-choice',
-      question: 'Guess the Place?',
+      question: 'Guess the monument?',
       images: [
         'public/quiz/Stonehenge.jpg'
     ],

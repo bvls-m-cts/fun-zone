@@ -8,19 +8,62 @@ class StartScene extends Phaser.Scene {
   create() {
     this.cameras.main.fadeIn(500, 0, 0, 0);
     this.cameras.main.setBackgroundColor('#111');
-    // Centered Play button only
-    const playBtn = this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'Play', {
-      fontSize: '36px',
-      color: '#000000',
-      backgroundColor: '#FFD700',
-      padding: { x: 30, y: 15 }
-    })
-      .setOrigin(0.5, 0.5)
-      .setInteractive()
-      .on('pointerdown', () => this.scene.start('Puzzle'));
-    playBtn.setAlpha(0.95);
-    playBtn.on('pointerover', () => playBtn.setAlpha(1));
-    playBtn.on('pointerout', () => playBtn.setAlpha(0.95));
+    // Play button as a triangle (play icon) with text inside
+    const centerX = this.sys.game.config.width / 2;
+    const centerY = this.sys.game.config.height / 2;
+    const triangleSize = 38;
+    const playBtnShape = this.add.graphics();
+    playBtnShape.fillStyle(0xFFD700, 1);
+    playBtnShape.lineStyle(4, 0xff3c00, 1);
+    playBtnShape.beginPath();
+    playBtnShape.moveTo(centerX - triangleSize, centerY - triangleSize);
+    playBtnShape.lineTo(centerX - triangleSize, centerY + triangleSize);
+    playBtnShape.lineTo(centerX + triangleSize, centerY);
+    playBtnShape.closePath();
+    playBtnShape.fillPath();
+    playBtnShape.strokePath();
+    playBtnShape.setInteractive(new Phaser.Geom.Triangle(centerX - triangleSize, centerY - triangleSize, centerX - triangleSize, centerY + triangleSize, centerX + triangleSize, centerY), Phaser.Geom.Triangle.Contains);
+    playBtnShape.setDepth(2);
+
+    // Play text inside triangle
+    const playBtnText = this.add.text(centerX, centerY, 'Play', {
+      fontSize: '22px',
+      color: '#ff3c00',
+      fontFamily: 'Segoe UI, Arial, sans-serif',
+      fontStyle: 'bold',
+      stroke: '#fff',
+      strokeThickness: 2,
+      shadow: {
+        offsetX: 0,
+        offsetY: 2,
+        color: '#fff',
+        blur: 4,
+        stroke: true,
+        fill: true
+      }
+    }).setOrigin(0.7, 0.5).setDepth(3);
+
+    // Make both triangle and text interactive
+    playBtnText.setInteractive();
+    const startGame = () => this.scene.start('Puzzle');
+    playBtnShape.on('pointerdown', startGame);
+    playBtnText.on('pointerdown', startGame);
+    playBtnShape.on('pointerover', () => {
+      playBtnShape.setAlpha(0.85);
+      playBtnText.setAlpha(1);
+    });
+    playBtnShape.on('pointerout', () => {
+      playBtnShape.setAlpha(1);
+      playBtnText.setAlpha(1);
+    });
+    playBtnText.on('pointerover', () => {
+      playBtnShape.setAlpha(0.85);
+      playBtnText.setAlpha(1);
+    });
+    playBtnText.on('pointerout', () => {
+      playBtnShape.setAlpha(1);
+      playBtnText.setAlpha(1);
+    });
   }
 }
 

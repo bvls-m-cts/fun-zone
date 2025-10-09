@@ -230,7 +230,7 @@ canvas {
   font-size: 0.95rem;
   font-family: Arial, sans-serif;
   color: #000000;
-  background: #FFD700;
+  background: hwb(0 100% 0%);
   border: none;
   border-radius: 10px;
   padding: 6px 16px;
