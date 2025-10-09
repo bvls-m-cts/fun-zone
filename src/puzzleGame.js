@@ -11,10 +11,10 @@ class StartScene extends Phaser.Scene {
     // Play button as a triangle (play icon) with text inside
     const centerX = this.sys.game.config.width / 2;
     const centerY = this.sys.game.config.height / 2;
-    const triangleSize = 38;
+    const triangleSize = 45;
     const playBtnShape = this.add.graphics();
     playBtnShape.fillStyle(0xFFD700, 1);
-    playBtnShape.lineStyle(4, 0xff3c00, 1);
+    playBtnShape.lineStyle(4, 0x000, 1);
     playBtnShape.beginPath();
     playBtnShape.moveTo(centerX - triangleSize, centerY - triangleSize);
     playBtnShape.lineTo(centerX - triangleSize, centerY + triangleSize);
@@ -28,7 +28,7 @@ class StartScene extends Phaser.Scene {
     // Play text inside triangle
     const playBtnText = this.add.text(centerX, centerY, 'Play', {
       fontSize: '22px',
-      color: '#ff3c00',
+      color: '#000',
       fontFamily: 'Segoe UI, Arial, sans-serif',
       fontStyle: 'bold',
       stroke: '#fff',
@@ -41,7 +41,7 @@ class StartScene extends Phaser.Scene {
         stroke: true,
         fill: true
       }
-    }).setOrigin(0.7, 0.5).setDepth(3);
+    }).setOrigin(0.8, 0.5).setDepth(3);
 
     // Make both triangle and text interactive
     playBtnText.setInteractive();
