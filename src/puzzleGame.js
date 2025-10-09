@@ -30,18 +30,10 @@ class StartScene extends Phaser.Scene {
       fontSize: '22px',
       color: '#000',
       fontFamily: 'Segoe UI, Arial, sans-serif',
-      fontStyle: 'bold',
+      // fontStyle: 'bold',
       stroke: '#fff',
-      strokeThickness: 2,
-      shadow: {
-        offsetX: 0,
-        offsetY: 2,
-        color: '#fff',
-        blur: 4,
-        stroke: true,
-        fill: true
-      }
-    }).setOrigin(0.8, 0.5).setDepth(3);
+      strokeThickness: 2
+    }).setOrigin(0.85, 0.5).setDepth(3);
 
     // Make both triangle and text interactive
     playBtnText.setInteractive();
