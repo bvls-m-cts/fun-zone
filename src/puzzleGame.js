@@ -170,35 +170,117 @@ class PuzzleScene extends Phaser.Scene {
       answerText = this.add.text(this.sys.game.config.width / 2, 420, '', { fontSize: '22px', color: '#27ae60', fontFamily: 'Arial, sans-serif' }).setOrigin(0.5, 0.5);
       hintText = this.add.text(this.sys.game.config.width / 2, 420, '', { fontSize: '22px', color: '#f39c12', fontFamily: 'Arial, sans-serif' }).setOrigin(0.5, 0.5);
       hintText.setVisible(false);
-      // Center images horizontally and auto-fit size (maximize size)
       const imgCount = puzzle.images.length;
       const maxTotalWidth = this.sys.game.config.width - 40; // 20px margin on each side
       const spacing = 32;
-      let imgSize = 280;
-      if (imgCount * imgSize + (imgCount - 1) * spacing > maxTotalWidth) {
-        imgSize = Math.floor((maxTotalWidth - (imgCount - 1) * spacing) / imgCount);
-      }
-      const totalWidth = imgCount * imgSize + (imgCount - 1) * spacing;
-      const startX = (this.sys.game.config.width - totalWidth) / 2 + imgSize / 2;
+      const maxImgSize = 400;
+      let imgSizes = [];
+      let loadedCount = 0;
+      let naturalSizes = [];
       puzzle.images.forEach((img, i) => {
-        const isRemote = /^https?:\/\//.test(img);
-        const key = isRemote ? img : img.replace(/^public\//, '');
-        const x = startX + i * (imgSize + spacing);
-        const imgObj = this.add.image(x, lastY + imgSize / 2, key)
-          .setDisplaySize(imgSize, imgSize)
-          .setInteractive();
-        imgObj.setAlpha(0);
-        this.tweens.add({ targets: imgObj, alpha: 1, duration: 500, delay: 400 + i * 120 });
-        imgObj.on('pointerdown', () => {
-          this.showImageModal(key);
-        });
-        this.activeImages.push(imgObj); // Track for cleanup
+        const image = new window.Image();
+        image.src = img.startsWith('public/') ? img.replace(/^public\//, '') : img;
+        image.onload = () => {
+          naturalSizes[i] = { w: image.naturalWidth, h: image.naturalHeight };
+          loadedCount++;
+          if (loadedCount === imgCount) {
+            let displaySizes = [];
+            if (imgCount === 1) {
+              // Single image: use natural size, scale down if needed
+              let w = naturalSizes[0].w;
+              let h = naturalSizes[0].h;
+              if (w > maxImgSize || h > maxImgSize) {
+                const scale = Math.min(maxImgSize / w, maxImgSize / h);
+                w = Math.round(w * scale);
+                h = Math.round(h * scale);
+              }
+              displaySizes = [{ w, h }];
+              const x = this.sys.game.config.width / 2;
+              const y = lastY + h / 2;
+              const key = puzzle.images[0].startsWith('http') ? puzzle.images[0] : puzzle.images[0].replace(/^public\//, '');
+              const imgObj = this.add.image(x, y, key)
+                .setDisplaySize(w, h)
+                .setInteractive();
+              imgObj.setAlpha(0);
+              this.tweens.add({ targets: imgObj, alpha: 1, duration: 500, delay: 400 });
+              imgObj.on('pointerdown', () => {
+                this.showImageModal(key);
+              });
+              this.activeImages.push(imgObj);
+              lastY += h + 60;
+            } else {
+              // Multiple images: scale all to same size so all fit in screen
+              // Find the smallest aspect ratio among images
+              let minAspect = Math.min(...naturalSizes.map(sz => sz.w / sz.h));
+              let maxAspect = Math.max(...naturalSizes.map(sz => sz.w / sz.h));
+              // Calculate max width per image
+              let availableWidth = maxTotalWidth - (imgCount - 1) * spacing;
+              let imgW = Math.floor(availableWidth / imgCount);
+              imgW = Math.min(imgW, maxImgSize);
+              // Calculate height for each image based on aspect ratio
+              let imgH = Math.min(...naturalSizes.map(sz => Math.round(imgW / (sz.w / sz.h))));
+              displaySizes = naturalSizes.map(sz => {
+                const scale = Math.min(imgW / sz.w, imgH / sz.h);
+                return { w: Math.round(sz.w * scale), h: Math.round(sz.h * scale) };
+              });
+              // Use the smallest height for all images
+              imgH = Math.min(...displaySizes.map(sz => sz.h));
+              displaySizes = displaySizes.map(sz => ({ w: imgW, h: imgH }));
+              const totalWidth = imgCount * imgW + (imgCount - 1) * spacing;
+              let startX = (this.sys.game.config.width - totalWidth) / 2;
+              puzzle.images.forEach((img, j) => {
+                const key = img.startsWith('http') ? img : img.replace(/^public\//, '');
+                const x = startX + j * (imgW + spacing) + imgW / 2;
+                const y = lastY + imgH / 2;
+                const imgObj = this.add.image(x, y, key)
+                  .setDisplaySize(imgW, imgH)
+                  .setInteractive();
+                imgObj.setAlpha(0);
+                this.tweens.add({ targets: imgObj, alpha: 1, duration: 500, delay: 400 + j * 120 });
+                imgObj.on('pointerdown', () => {
+                  this.showImageModal(key);
+                });
+                this.activeImages.push(imgObj);
+              });
+              lastY += imgH + 60;
+            }
+          }
+        };
       });
-      lastY += imgSize + 60;
     } else if (puzzle.type === 'direct-answer') {
       answerText = this.add.text(400, 420, '', { fontSize: '22px', color: '#27ae60', fontFamily: 'Arial, sans-serif' });
       hintText = this.add.text(400, 420, '', { fontSize: '22px', color: '#f39c12', fontFamily: 'Arial, sans-serif' });
       hintText.setVisible(false);
+      // Show image in main puzzle area if present
+      // (REMOVED: do not show image immediately for direct-answer)
+      // if (puzzle.images && puzzle.images.length > 0) {
+      //   const imgSrc = puzzle.images[0];
+      //   const key = imgSrc.startsWith('http') ? imgSrc : imgSrc.replace(/^public\//, '');
+      //   const image = new window.Image();
+      //   image.src = key;
+      //   image.onload = () => {
+      //     let w = image.naturalWidth;
+      //     let h = image.naturalHeight;
+      //     const maxImgSize = 400;
+      //     if (w > maxImgSize || h > maxImgSize) {
+      //       const scale = Math.min(maxImgSize / w, maxImgSize / h);
+      //       w = Math.round(w * scale);
+      //       h = Math.round(h * scale);
+      //     }
+      //     const x = this.sys.game.config.width / 2;
+      //     const y = lastY + h / 2;
+      //     const imgObj = this.add.image(x, y, key)
+      //       .setDisplaySize(w, h)
+      //       .setAlpha(0);
+      //     this.tweens.add({ targets: imgObj, alpha: 1, duration: 500, delay: 200 });
+      //     imgObj.setInteractive();
+      //     imgObj.on('pointerdown', () => {
+      //       this.showImageModal(key);
+      //     });
+      //     this.activeImages.push(imgObj);
+      //     lastY += h + 60;
+      //   };
+      // }
     }
     // Center answer text for all puzzle types and set color to orange
     if (answerText) {
@@ -245,6 +327,36 @@ class PuzzleScene extends Phaser.Scene {
                     this.showExplanation(puzzle.explanation);
                 });
             infoIcon.setOrigin(0, 0.5);
+          }
+          // Show image if present for direct-answer
+          if (puzzle.type === 'direct-answer' && puzzle.images && puzzle.images.length > 0) {
+            // Only show first image for direct-answer
+            const imgSrc = puzzle.images[0];
+            const key = imgSrc.startsWith('http') ? imgSrc : imgSrc.replace(/^public\//, '');
+            // Load image to get natural size
+            const image = new window.Image();
+            image.src = key;
+            image.onload = () => {
+              let w = image.naturalWidth;
+              let h = image.naturalHeight;
+              const maxImgSize = 400;
+              if (w > maxImgSize || h > maxImgSize) {
+                const scale = Math.min(maxImgSize / w, maxImgSize / h);
+                w = Math.round(w * scale);
+                h = Math.round(h * scale);
+              }
+              const x = this.sys.game.config.width / 2;
+              const y = answerText.y + answerText.height + h / 2 + 20;
+              const imgObj = this.add.image(x, y, key)
+                .setDisplaySize(w, h)
+                .setAlpha(0);
+              this.tweens.add({ targets: imgObj, alpha: 1, duration: 500, delay: 200 });
+              imgObj.setInteractive();
+              imgObj.on('pointerdown', () => {
+                this.showImageModal(key);
+              });
+              this.activeImages.push(imgObj);
+            };
           }
         }
       });
