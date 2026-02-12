@@ -1,220 +1,160 @@
 export const puzzles = {
   all: [
     {
-      type: 'multiple-choice',
-      question: "I’m there when your tire goes flat, Or when your engine says, “That’s that!.”\nI’m not a mechanic, but I send one fast.\nWho am I, making breakdowns a thing of the past?",
-      options: ['a. Car Dealership', 'b. GPS Navigation', 'c. Vehicle Warranty', 'd. AA Roadside Assistance'],
-      hint: '', 
-      answer: 'd. AA Roadside Assistance',
-      explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "If you had cynophobia, which animal would scare you?",
-      options: ['a. Dogs', 'b. Cats', 'c. Birds', 'd. Snakes'],
-      hint: '', 
-      answer: 'a. Dogs',
-      explanation: 'Cyno is the Greek word for dog. Cynophobia is the medical term for an extreme and irrational fear of dogs.'
+      type: 'direct-answer',
+      question: 'How many times does the letter ‘a’ appear when spelling out all the numbers from 1 to 100?',
+      images: [],
+      hint: '',
+      answer: 'Zero',
+      explanation: 'There are 0 occurrences of the letter “a” in the spelled-out numbers from 1 to 100 (in both American and British conventions)'
     },
     {
       type: 'image-choice',
-      question: 'Guess the word?',
+      question: 'Image shows a rock‑cut cave complex in India, famous for Buddhist sculptures. Name it.',
       images: [
-        'public/quiz/alphabet/P.jpg',
-        'public/quiz/alphabet/E.jpg',
-        'public/quiz/alphabet/A.jpg',
-        'public/quiz/alphabet/L.jpg',
-        'public/quiz/alphabet/S.jpg',
-        'public/quiz/alphabet/P.jpg'
+        'public/quiz/Elephanta_Caves.png'
     ],
-    hint: 'I will keep the doctor away',
-    answer: 'APPLES',
+    hint: 'Located on an island, accessible by ferry from Mumbai.',
+    answer: 'Elephanta Caves',
+    explanation: 'The Elephanta Caves form a collection of cave temples predominantly dedicated to the Hindu god Shiva; UNESCO has designated them as a World Heritage Site. They are located on Elephanta Island, or Gharapuri, in Mumbai Harbour, 10 kilometres east of Mumbai in the Indian state of Maharashtra.'
+    },
+    {
+      type: 'image-choice',
+      question: 'In Jurassic Park movie, what animal’s DNA was mixed with dinosaur DNA to fill the gaps?',
+      images: [
+        'public/quiz/dinosaur.jpg'
+    ],
+    hint: '',
+    answer: 'Frog',
     explanation: ''
-    },
+    },    
     {
-      type: 'multiple-choice',
-      question: "I find what others miss in logs, in code, in every abyss.\nI break things just to make them right, and sleep with test cases every night.\nWho am I?",
-      options: ['a. Developer', 'b. Tester', 'c. Scrum Master', 'd. Product Owner'],
-      hint: '', 
-      answer: 'b. Tester',
+      type: 'image-choice',
+      question: 'Which is the only flag in the world that is not rectangular or square?',
+      images: [
+        'public/quiz/Nepal.jpg'
+    ],
+      hint: '',
+      answer: 'Nepal',
       explanation: ''
     },
     {
-      type: 'multiple-choice',
-      question: "The speed of a computer mouse is measured in what units?",
-      options: ['a. Inches', 'b. Paws', 'c. Centimeters', 'd. Mickeys'],
-      hint: '', 
-      answer: 'd. Mickeys',
-      explanation: 'The unit of measurement for the speed and movement of a computer mouse is the "Mickey," with one Mickey being equivalent to approximately 1/100th of an inch.'
-    },
-    {
       type: 'image-choice',
-      question: 'Guess the Scientist?',
+      question: 'Guess the festival that celebrated by throwing tomatoes at each other.',
       images: [
-        'public/quiz/Albert_Einstein.jpg'
+        'public/quiz/La_Tomatina.jpg'
     ],
-    hint: 'He is known for his “Theory of Relativity”',
-    answer: 'Albert Einstein',
-    explanation: 'Albert Einstein as a boy. This photo was taken in 1884, at the age 5.'
-    },
-    {
-      type: 'multiple-choice',
-      question: "On which day of the week are workers most statistically likely to call in sick?",
-      options: ['a. Friday', 'b. Tuesday', 'c. Wednesday', 'd. Monday'],
-      hint: '', 
-      answer: 'd. Monday',
-      explanation: 'This phenomenon is often attributed to the "Monday blues" or the transition from the weekend to the workweek.'
-    },
-    {
-      type: 'multiple-choice',
-      question: "What is the only food that never goes bad?",
-      options: ['a. Honey', 'b. Corn', 'c. Pickles', 'd. Rice'],
-      hint: '', 
-      answer: 'a. Honey',
-      explanation: 'Honey is naturally acidic and has a low moisture content, which makes it an inhospitable environment for bacteria and other microorganisms.'
+    hint: 'A spanish food fight festival',
+    answer: 'La Tomatina',
+    explanation: 'La Tomatina is an annual Spanish food fight festival held on the last Wednesday of August in the town of Buñol, near Valencia. Participants throw over 120,000 kilograms of tomatoes at each other in a massive, one-hour-long battle, which has become a major tourist attraction.'
     },
     {
       type: 'direct-answer',
-      question: 'Solve the Riddle.\nIt has keys, but no locks. It has space, but no room. You can enter, but can’t go inside. What is it?',
+      question: 'What is the only continent without reptiles or snakes?',
       hint: '',
-      answer: 'A keyboard',
+      answer: 'Antarctica',
       explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "In Harry Potter, what is the name of Harry’s pet owl?",
-      options: ['a. Crookshanks', 'b. Hedwig', 'c. Scabbers', 'd. Errol'],
-      hint: '', 
-      answer: 'b. Hedwig',
-      explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "What sea creatures have been used in wars?",
-      options: ['a. Jellyfish', 'b. Sharks', 'c. Dolphins', 'd. Otters'],
-      hint: '', 
-      answer: 'c. Dolphins',
-      explanation: 'Dolphins have been trained by military forces for tasks such as detecting mines, identifying enemy divers, and recovering equipment.'
     },
     {
       type: 'image-choice',
-      question: "What's wrong here?",
+      question: 'Which Indian state is home to the Valley of Flowers National Park, a UNESCO World Heritage Site?',
       images: [
-        'public/quiz/wwh_3.jpg'
+        'public/quiz/Uttarakhand.jpg'
     ],
     hint: '',
-    answer: 'It’s Almond milk, but there’s a cow on it',
-    explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "Which country has won the most FIFA World Cups?",
-      options: ['a. Germany', 'b. Argentina', 'c. Brazil', 'd. Italy'],
-      hint: '', 
-      answer: 'c. Brazil',
-      explanation: 'Brazil has won 5 World Cups: 1958, 1962, 1970, 1994, 2002'
-    },
+    answer: 'Uttarakhand',
+    explanation: 'It is located in Chamoli in the state of Uttarakhand and is known for its meadows of endemic alpine flowers and the variety of flora.'
+    },    
     {
       type: 'image-choice',
-      question: 'Guess the monument?',
+      question: 'In Titanic, what was the name of the necklace that Rose had?',
       images: [
-        'public/quiz/Stonehenge.jpg'
+        'public/quiz/HeartOfOcean.jpg'
     ],
-    hint: 'Built by hands long gone, still standing strong.',
-    answer: 'Stonehenge',
-    explanation: 'Stonehenge is a prehistoric monument in England, built over 4,000 years ago. Its purpose remains a mystery, but it’s believed to have been used for ceremonies or astronomy.'
-    },
-    {
-      type: 'multiple-choice',
-      question: "I’m famous for circles, not squares, Drivers here must be quite aware.\nWith more roundabouts than you’d expect, What town am I, with traffic unchecked?",
-      options: ['a. Swindon', 'b. Basingstoke', 'c. Oxford', 'd. Reading'],
-      hint: '', 
-      answer: 'b. Basingstoke',
-      explanation: ''
-    },
-    {
-      type: 'image-choice',
-      question: "What's wrong here?",
-      images: [
-        'public/quiz/wwh_1.jpg'
-    ],
-    hint: '',
-    answer: 'This wire is unplugged but still the lamp is on',
-    explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "In Tom and Jerry, what is Jerry?",
-      options: ['a. A Cat', 'b. A Dog', 'c. A Mouse', 'd. A Rabbit'],
-      hint: '', 
-      answer: 'c. A Mouse',
-      explanation: ''
-    },
-    {
-      type: 'image-choice',
-      question: 'Guess the word?',
-      images: [
-        'public/quiz/alphabet/D.jpg',
-        'public/quiz/alphabet/W.jpg',
-        'public/quiz/alphabet/R.jpg',
-        'public/quiz/alphabet/A.jpg',
-        'public/quiz/alphabet/O.jpg',
-        'public/quiz/alphabet/Y.jpg',
-        'public/quiz/alphabet/A.jpg',
-    ],
-    hint: 'It’s paved for tires, not wings, waves, or rails.',
-    answer: 'ROADWAY',
-    explanation: ''
-    },
-    {
-      type: 'multiple-choice',
-      question: "I don’t wear a badge, yet I’m followed. I don’t give orders, yet I’m obeyed.\nI inspire without speaking, and I’m strongest when shared. What am I?",
-      options: ['a. Management', 'b. Leadership', 'c. Communication', 'd. Strategy'],
-      hint: '', 
-      answer: 'b. Leadership',
-      explanation: ''
+    hint: 'Also called the "Blue Diamond"',
+    answer: 'The Heart of the Ocean',
+    explanation: 'The name of the necklace Rose wore in Titanic was the Heart of the Ocean. This fictional blue diamond necklace was a gift from her fiancé, Caledon Hockley, and is a central element of the film’s plot.'
     },
     {
       type: 'direct-answer',
-      question: 'Solve the Riddle.\nI am the tool you hate to receive, but also can’t stand to lose. My presence marks your absence.',
+      question: 'Solve the Riddle:\nI’m tall when I’m young, and short when I’m old. What am I?',
       hint: '',
-      answer: 'An out-of-office message',
+      answer: 'A Candle',
       explanation: ''
     },
     {
-      type: 'multiple-choice',
-      question: "What is the name of the little dot seen above the alphabets ‘j’ and the ‘i’?",
-      options: ['a. A Dot', 'b. A Tittle', 'c. A Jot', 'd. A Spot'],
-      hint: '', 
-      answer: 'b. A Tittle',
-      explanation: 'A tittle is a small distinguishing mark, such as a diacritic in a foreign language or the dot on a lowercase i or j.'
+      type: 'image-choice',
+      question: 'Which city is known as the “Pink City” of India?',
+      images: [
+        'public/quiz/Jaipur.jpg'
+    ],
+    hint: '',
+    answer: 'Jaipur',
+    explanation: 'The Pink City of India is Jaipur, the capital of Rajasthan. The nickname is due to the distinctive terracotta pink color of the buildings in its historic walled city area.'
+    },
+    {
+      type: 'image-choice',
+      question: 'Guess the place:',
+      images: [
+        'public/quiz/London/img1.jpg','public/quiz/London/img2.jpg','public/quiz/London/img3.jpg'
+    ],
+      hint: '',
+      answer: 'London, UK',
+      explanation: ''
+    },
+    {
+      type: 'image-choice',
+      question: 'In the movie Avatar, what is the valuable mineral that the humans are mining on Pandora?',
+      images: [
+        'public/quiz/Unobtanium.jpeg'
+    ],
+      hint: '',
+      answer: 'Unobtanium',
+      explanation: ''
+    },
+    {
+      type: 'image-choice',
+      question: 'Guess the festival:\nPeople wear costumes, carve pumpkins, and go trick‑or‑treating.',
+      images: [
+        'public/quiz/Halloween.jpg'
+    ],
+    hint: '',
+    answer: 'Halloween',
+    explanation: 'Halloween is celebrated on October 31st each year. It originated from the ancient Celtic festival of Samhain, where people would light bonfires and wear costumes to ward off ghosts. Today, it is known for activities like trick-or-treating, costume parties, and pumpkin carving.'
+    },
+    {
+      type: 'direct-answer',
+      question: 'Solve the Riddle:\nWhat has to be broken before you can use it?',
+      hint: '',
+      answer: 'An Egg',
+      explanation: ''
     }
     
   ]
 };
 
 export const truthQuestions = [
-  "What’s a secret you’ve never told anyone?",
-  "If you could switch lives with one person for a day, who would it be?",
+  "If you could instantly teleport anywhere, where would you go?",
+  "If you could swap jobs/role with anyone here for a day, who would it be?",
   "What’s the funniest thing that’s ever happened to you at work?",
+  "Which colleague would you like to take along with you to survive a zombie apocalypse?",
   "What’s a skill you secretly admire in a colleague?",
   "Have you ever forgotten someone’s name right after they introduced themselves?",
   "What’s your go-to excuse when you’re running late?",
   "Have you ever accidentally sent a message to the wrong person on Teams or email?",
   "If you could have a superpower for a day, what would it be?",
-  "If you could be any age for a week, what age would you be?",
-  "Which emoji do you use frequently while messaging?"
+  "If you could be any age for a week, what age would you be?"  
 ];
 
 export const dareQuestions = [
   "Speak a sentence in 2 different languages",
   "Compliment three colleagues that you wish to",
   "Tell a tongue twister as fast as you can - ‘She sells seashells by the seashore’ (or) ‘Peter piper picked a peck of pickled peppers’",
-  "Tell any nursery rhyme that you remember",
-  "Have a 15 seconds conversation with an object",
+  "Tell any nursery rhyme that you remember",  
   "Pretend you’re giving a weather report for your current mood",
   "Share a random fun fact you know — the weirder, the better!",
   "Pretend you're a news anchor reporting on something funny that happened in the office",
   "Explain the cooking process of your favourite dish in a minute",
-  "Tell a sentence by adding 'meow' before each word"
+  "Tell a sentence by adding 'meow' before each word",
+  "Have a 15 seconds conversation with an object"
 ];
