@@ -43,7 +43,7 @@ export const puzzles = {
         'public/quiz/q5.jpg'
     ],
     hint: '',
-    answer: 'Finding Nemo',
+    answer: 'Finding Dori',
     explanation: ''
     },
     {
